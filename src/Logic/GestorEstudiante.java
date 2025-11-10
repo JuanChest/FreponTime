@@ -28,7 +28,7 @@ public class GestorEstudiante {
     }
     public boolean iniciarSesion (String correo, String contrasena){
         for(Estudiante estudiante: estudiantes){
-            if(estudiante.getCorreoElectrónico().compareTo(correo) == 0 && estudiante.getContraseña().compareTo(contrasena) ==0){
+            if(estudiante.getCorreoElectronico().compareTo(correo) == 0 && estudiante.getContrasenia().compareTo(contrasena) ==0){
                 estudiante.setEnLinea(true);
                 System.out.println("Se ha iniciado sesion");
                 return true;
@@ -59,9 +59,9 @@ public class GestorEstudiante {
     }
 
     public boolean enviarCodigo(Estudiante estudiante) {
-        GestorCorreosElectrónicos correosElectrónicos = new GestorCorreosElectrónicos();
+        GestorCorreosElectrónicos correosElectronicos = new GestorCorreosElectrónicos();
         this.codigoDeVerificacion = generarCódigoRandom(1000,9999);
-        if(!correosElectrónicos.enviarMensajeDeVerificaciónDeRegistro(estudiante.getCorreoElectrónico(),
+        if(!correosElectronicos.enviarMensajeDeVerificaciónDeRegistro(estudiante.getCorreoElectronico(),
                 this.codigoDeVerificacion, estudiante.getUsuario())){
             return false;
         }
@@ -83,7 +83,7 @@ public class GestorEstudiante {
 
     public boolean buscarCorreo(String correoElectrónico) {
         for (Estudiante estudiante : estudiantes) {
-            if(estudiante.getCorreoElectrónico().equals(correoElectrónico)){
+            if(estudiante.getCorreoElectronico().equals(correoElectrónico)){
                 return true;
             }
         }

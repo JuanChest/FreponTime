@@ -42,7 +42,7 @@ public class RegistroController {
                     "encuentra registrado... Ingrese otro Usuario");
             return;
         }
-        if(gestorReserva.buscarCorreo(estudianteAux.getCorreoElectrónico())){
+        if(gestorReserva.buscarCorreo(estudianteAux.getCorreoElectronico())){
             NavegacionInterfaces.mostrarAlerta("Operación Fallida", "El usuario ingresado ya se " +
                     "encuentra registrado... Ingrese su correo Personal");
             return;

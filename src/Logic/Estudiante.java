@@ -6,20 +6,20 @@ public class Estudiante {
     private String apellido;
     private String nombre;
     private String usuario;
-    private String correoElectrónico;
-    private String contraseña;
+    private String correoElectronico;
+    private String contrasenia;
 
     private ArrayList<Integer> numerosDeReservas;
-    private boolean enLínea;
+    private boolean enLinea;
 
-    public Estudiante(String apellido, String nombre, String usuario, String correoElectrónico, String contraseña) {
+    public Estudiante(String apellido, String nombre, String usuario, String correoElectronico, String contrasenia) {
         numerosDeReservas = new ArrayList<>();
         this.apellido = apellido;
         this.nombre = nombre;
         this.usuario = usuario;
-        this.correoElectrónico = correoElectrónico;
-        this.contraseña = contraseña;
-        this.enLínea = false;
+        this.correoElectronico = correoElectronico;
+        this.contrasenia = contrasenia;
+        this.enLinea = false;
     }
 
     public String getNombre() {
@@ -34,28 +34,28 @@ public class Estudiante {
         return usuario;
     }
 
-    public String getCorreoElectrónico() {
-        return correoElectrónico;
+    public String getCorreoElectronico() {
+        return correoElectronico;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasenia() {
+        return contrasenia;
     }
 
     public void setEnLinea(boolean enLínea) {
-        this.enLínea = enLínea;
+        this.enLinea = enLínea;
     }
 
     public boolean getEnLinea() {
-        return this.enLínea;
+        return this.enLinea;
     }
 
     public void  setNumerosDeReservas(int numerosDeReservas) {
         this.numerosDeReservas.add(numerosDeReservas);
     }
 
-    public boolean isEnLínea() {
-        return enLínea;
+    public boolean isEnLinea() {
+        return enLinea;
     }
 
     public ArrayList<Integer> getNumerosDeReservas() {
@@ -68,8 +68,8 @@ public class Estudiante {
                 "apellido='" + apellido + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", usuario='" + usuario + '\'' +
-                ", correoElectrónico='" + correoElectrónico + '\'' +
-                ", enLínea=" + enLínea +
+                ", correoElectrónico='" + correoElectronico + '\'' +
+                ", enLínea=" + enLinea +
                 ", numerosDeReservas=" + numerosDeReservas +
                 '}';
     }

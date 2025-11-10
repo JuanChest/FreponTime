@@ -16,8 +16,8 @@ public class GestorArchivos {
                 writer.write(estudiante.getApellido() + " "
                         + estudiante.getNombre() + " "
                         + estudiante.getUsuario() + " "
-                        + estudiante.getCorreoElectrónico() + " "
-                        + estudiante.getContraseña() + "\n");
+                        + estudiante.getCorreoElectronico() + " "
+                        + estudiante.getContrasenia() + "\n");
             }
             writer.close();
         } catch (IOException e) {

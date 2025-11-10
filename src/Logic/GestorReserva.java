@@ -53,7 +53,7 @@ public class GestorReserva {
             return null;
         }
         for(Estudiante estudianteEnLínea: gestorEstudiante.getEstudiantes()){
-            if(estudianteEnLínea.isEnLínea()){
+            if(estudianteEnLínea.isEnLinea()){
                 Reserva nuevaReserva = new Reserva(reservasDeEstudiantes.size(), juego, horario);
                 potencialReserva = nuevaReserva;
                 estudianteEnLínea.getNumerosDeReservas().add(nuevaReserva.getNumero());
