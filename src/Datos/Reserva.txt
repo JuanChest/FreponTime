@@ -1,0 +1,2 @@
+0 Billar false 2025-11-09 09:00 60 true 2.0 /Data/BILLAR.png
+1 PingPong true 2025-11-09 09:00 60 true 1.0 /Data/PINGPONG.png
