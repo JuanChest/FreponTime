@@ -1,4 +1,4 @@
-package logic;
+package Logic;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;

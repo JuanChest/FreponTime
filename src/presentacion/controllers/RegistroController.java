@@ -1,7 +1,7 @@
 package presentacion.controllers;
 
-import logic.Estudiante;
-import logic.GestorReserva;
+import Logic.Estudiante;
+import Logic.GestorReserva;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

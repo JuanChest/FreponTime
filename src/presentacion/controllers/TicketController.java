@@ -1,6 +1,6 @@
 package presentacion.controllers;
 
-import logic.*;
+import Logic.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

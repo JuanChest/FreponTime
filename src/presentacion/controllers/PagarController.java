@@ -1,7 +1,7 @@
 package presentacion.controllers;
 
-import logic.GestorReserva;
-import logic.Pago;
+import Logic.GestorReserva;
+import Logic.Pago;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

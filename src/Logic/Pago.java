@@ -1,4 +1,4 @@
-package logic;
+package Logic;
 
 public class Pago {
     private int nPago;
