@@ -1,6 +1,6 @@
 package presentacion.controllers;
 
-import Logic.GestorReserva;
+import logic.GestorReserva;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;

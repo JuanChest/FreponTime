@@ -1,9 +1,9 @@
 package presentacion.controllers;
 
-import Logic.Horario;
-import Logic.Juego;
-import Logic.GestorReserva;
-import Logic.Reserva;
+import logic.Horario;
+import logic.Juego;
+import logic.GestorReserva;
+import logic.Reserva;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;

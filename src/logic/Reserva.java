@@ -1,4 +1,4 @@
-package Logic;
+package logic;
 
 public class Reserva {
     private int numero;

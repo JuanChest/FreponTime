@@ -1,17 +1,14 @@
 package presentacion.controllers;
 
-import Logic.GestorReserva;
-import Logic.Pago;
+import logic.GestorReserva;
+import logic.Pago;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
 import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
-import java.net.URL;
 
 public class PagarController {
 

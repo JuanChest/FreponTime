@@ -1,13 +1,16 @@
-package Logic;
+package logic;
 
+import java.util.logging.Logger;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GestorPago {
     private ArrayList<Pago> pagos;
     private ArrayList<Ticket> tickets;
+    private static final Logger logger = Logger.getLogger(GestorPago.class.getName());
 
     public GestorPago() {
         pagos = new ArrayList<>();
@@ -17,14 +20,14 @@ public class GestorPago {
         GestorArchivos.cargarPagosTicket(this, new File("src/Datos/PagosTickets.txt"));
     }
 
-    public void crearPagoDeReserva(Reserva nuevaReserva, ArrayList<Reserva> reservasDeEstudiantes, Juego juego) {
+    public void crearPagoDeReserva(Reserva nuevaReserva, List<Reserva> reservasDeEstudiantes, Juego juego) {
         Ticket ticket = new Ticket("T-N" + nuevaReserva.getNumero(), LocalDate.now(), LocalTime.now(), false);
         Pago nuevoPago = new Pago(reservasDeEstudiantes.size(), juego.getPrecioPorHora() * nuevaReserva.getHorario().getTiempo().toHours(), false);
         nuevoPago.setTicket(ticket);
         tickets.add(ticket);
         pagos.add(nuevoPago);
         nuevaReserva.setPago(nuevoPago); // Asociar el pago a la reserva
-        System.out.println("Reserva creada con éxito. Ticket generado: " + ticket.getCodigo());
+        logger.info("Reserva creada con éxito. Ticket generado: " + ticket.getCodigo());
     }
     public boolean pagarReserva(Reserva reservaAPagar) {
         if (reservaAPagar.getPago().isEstadoPago()) {
@@ -34,7 +37,7 @@ public class GestorPago {
 
         reservaAPagar.getPago().setEstadoPago(true); // Marcar el pago como pagado
         reservaAPagar.setEstadoReserva(true); // Activa la reserva
-        System.out.println("Pago confirmado. Reserva activada para uso.");
+        logger.info("Pago confirmado. Reserva activada para uso.");
         return true;
     }
 
@@ -42,11 +45,11 @@ public class GestorPago {
         pagos.add(pago);
     }
 
-    public ArrayList<Pago> getPagos() {
+    public List<Pago> getPagos() {
         return pagos;
     }
 
-    public ArrayList<Ticket> getTickets() {
+    public List<Ticket> getTickets() {
         return tickets;
     }
 

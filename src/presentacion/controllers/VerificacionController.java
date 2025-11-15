@@ -1,6 +1,6 @@
 package presentacion.controllers;
 
-import Logic.GestorReserva;
+import logic.GestorReserva;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

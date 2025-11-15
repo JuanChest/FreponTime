@@ -1,6 +1,6 @@
 package presentacion.controllers;
 
-import Logic.*;
+import logic.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -49,10 +49,12 @@ public class TicketController {
     @FXML
     private ImageView imageView;
 
-    private ObservableList<Ticket> ticket;
-    private ObservableList<Estudiante> estudiante;
-    private ObservableList<Horario> horario;
+
+    ObservableList<Estudiante> estudiante = FXCollections.observableArrayList();
+    ObservableList<Horario> horario = FXCollections.observableArrayList();
     GestorReserva gestorReserva = GestorReserva.getInstance();
+    ObservableList<Ticket> ticket = FXCollections.observableArrayList();
+
     @FXML
     public void initialize() {
         if(gestorReserva.buscarEstudiante(true).getNumerosDeReservas().isEmpty()){
@@ -65,7 +67,6 @@ public class TicketController {
             return;
         }
 
-        ticket = FXCollections.observableArrayList();
         this.columnaCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
         this.columnaFecha.setCellValueFactory(new PropertyValueFactory<>("fechaReserva"));
         this.columnaHora.setCellValueFactory(new PropertyValueFactory<>("horaReserva"));
@@ -73,7 +74,6 @@ public class TicketController {
         this.ticket.add(gestorReserva.getReservasDeEstudiantes().get(indiceAux).getPago().getTicket());
         this.tablaTicket.setItems(this.ticket);
 
-        estudiante = FXCollections.observableArrayList();
         this.columnaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         this.columnApellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
         this.columnaUsuario.setCellValueFactory(new PropertyValueFactory<>("usuario"));
@@ -81,7 +81,7 @@ public class TicketController {
         this.estudiante.add(gestorReserva.buscarEstudiante(true));
         this.tablaEstudiante.setItems(this.estudiante);
 
-        horario = FXCollections.observableArrayList();
+
         this.columnaFecha1.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         this.columnaHora1.setCellValueFactory(new PropertyValueFactory<>("hora"));
         this.columnaDuracion.setCellValueFactory(new PropertyValueFactory<>("tiempo"));
@@ -94,7 +94,6 @@ public class TicketController {
     @FXML
     public void continuar (ActionEvent event) {
 
-        //NavegacionInterfaces.mostrarAlerta("Pago Valido", "Su pago ha sido validado.");
         NavegacionInterfaces.cambiarVentana((Stage) continuarButton.getScene().getWindow(),
                 "/presentacion/views/SeleccionarJuego.fxml", "Seleccionar Juego");
     }
