@@ -59,7 +59,7 @@ public class GestorEstudiante {
     }
 
     public boolean enviarCodigo(Estudiante estudiante) {
-        GestorCorreosElectrónicos correosElectronicos = new GestorCorreosElectrónicos();
+        GestorCorreosElectronicos correosElectronicos = new GestorCorreosElectronicos();
         this.codigoDeVerificacion = generarCódigoRandom(1000,9999);
         if(!correosElectronicos.enviarMensajeDeVerificaciónDeRegistro(estudiante.getCorreoElectronico(),
                 this.codigoDeVerificacion, estudiante.getUsuario())){

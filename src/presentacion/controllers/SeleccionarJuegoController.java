@@ -26,7 +26,7 @@ public class SeleccionarJuegoController {
         System.out.println(gestorReserva.buscarEstudiante(true));
         gestorReserva.buscarEstudiante(true).setEnLinea(false);
 
-        GestorArchivos.guardarReservas(gestorReserva, gestorReserva.getReservaFile());
+        gestorReserva.guardarReservas();
         NavegacionInterfaces.cambiarVentana((Stage) cerrarSesionButton.getScene().getWindow(), "/presentacion/views/login.fxml", "Login...");
         System.out.println(gestorReserva.buscarEstudiante(true));
     }
