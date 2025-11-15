@@ -26,25 +26,26 @@ public class TicketController {
     private TableView<Horario> tablaHorario;
 
     @FXML
-    private TableColumn columnaNombre;
+    private TableColumn<Estudiante, String> columnaNombre;
     @FXML
-    private TableColumn columnApellido;
+    private TableColumn<Estudiante, String> columnApellido;
     @FXML
-    private TableColumn columnaUsuario;
+    private TableColumn<Estudiante, String> columnaUsuario;
 
     @FXML
-    private TableColumn columnaCodigo;
+    private TableColumn<Ticket, String> columnaCodigo;
     @FXML
-    private TableColumn columnaFecha;
+    private TableColumn<Ticket, String> columnaFecha;
     @FXML
-    private TableColumn columnaHora;
+    private TableColumn<Ticket, String> columnaHora;
 
     @FXML
-    private TableColumn columnaFecha1;
+    private TableColumn<Horario, String> columnaFecha1;
     @FXML
-    private TableColumn columnaHora1;
+    private TableColumn<Horario, String> columnaHora1;
     @FXML
-    private TableColumn columnaDuracion;
+    private TableColumn<Horario, Integer> columnaDuracion;
+
 
     @FXML
     private ImageView imageView;

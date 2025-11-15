@@ -31,7 +31,7 @@ public class GestorPago {
     }
     public boolean pagarReserva(Reserva reservaAPagar) {
         if (reservaAPagar.getPago().isEstadoPago()) {
-            System.out.println("El pago ya fue confirmado.");
+            logger.info("El pago ya fue confirmado.");
             return false;
         }
 
