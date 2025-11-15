@@ -8,27 +8,20 @@ public class GestorReserva {
     private ArrayList<Juego> juegos;
     private GestorEstudiante gestorEstudiante;
     private GestorPago gestorPago;
-    private File reservasFile;
-    private File juegosFile;
-    private File reservasEstudiantesFile;
     private String verificacionDePago = "CANCELADO24";
+    private RepositorioReserva repositorioReserva;
 
     private static GestorReserva instance;
 
-    private GestorReserva(){
-        reservasDeEstudiantes = new ArrayList<Reserva>();
-        juegos = new ArrayList<Juego>();
+    private GestorReserva(RepositorioReserva repositorioReserva) {
+        this.repositorioReserva = repositorioReserva;
+
+        reservasDeEstudiantes = new ArrayList<>();
+        juegos = new ArrayList<>();
         gestorEstudiante = new GestorEstudiante();
         gestorPago = new GestorPago();
 
-        reservasFile = new File("src/Datos/Reserva.txt");
-        juegosFile = new File("src/Datos/Juegos.txt");
-        reservasEstudiantesFile = new File("src/Datos/ReservasDeEstudiante.txt");
-
-        GestorArchivos.cargarJuegos(this, juegosFile);
-        GestorArchivos.cargarReservas(this, reservasFile);
-        GestorArchivos.cargarReservasDeEstudiantes(this, reservasEstudiantesFile);
-
+        repositorioReserva.cargarDatos(this);
         cargarPagosYTicket();
     }
 
@@ -41,36 +34,37 @@ public class GestorReserva {
 
     public static GestorReserva getInstance() {
         if (instance == null) {
-            instance = new GestorReserva();
+            instance = new GestorReserva(new RepositorioReserva(
+                    "src/Datos/Reserva.txt",
+                    "src/Datos/Juegos.txt",
+                    "src/Datos/ReservasDeEstudiante.txt"
+            ));
         }
         return instance;
     }
 
-    public Reserva crearReserva(Juego juego, Horario horario) {
-        Reserva potencialReserva = null;
+    public void crearReserva(Juego juego, Horario horario) {
         if(existirReservasDuplicadas(juego, horario)){
             System.out.println("Ya existe una reserva para este juego y horario.");
-            return null;
+            return;
         }
         for(Estudiante estudianteEnLínea: gestorEstudiante.getEstudiantes()){
             if(estudianteEnLínea.isEnLinea()){
                 Reserva nuevaReserva = new Reserva(reservasDeEstudiantes.size(), juego, horario);
-                potencialReserva = nuevaReserva;
                 estudianteEnLínea.getNumerosDeReservas().add(nuevaReserva.getNumero());
                 reservasDeEstudiantes.add(nuevaReserva);
 
                 gestorPago.crearPagoDeReserva(nuevaReserva, reservasDeEstudiantes, juego);
-                GestorArchivos.guardarReservas(this, reservasFile);
-                GestorArchivos.guardarReservasDeEstudiantes(this, reservasEstudiantesFile);
-                return potencialReserva;
+                repositorioReserva.guardarReserva(this);
+                repositorioReserva.guardarReservasDeEstudiante(this);
+                return;
             }
         }
-        return potencialReserva;
     }
 
     public boolean existirReservasDuplicadas(Juego juego, Horario horario) {
-        for(int i = 0; i < reservasDeEstudiantes.size(); i++){
-            if(reservasDeEstudiantes.get(i).getJuego().equals(juego) && reservasDeEstudiantes.get(i).getHorario().equals(horario)){
+            for (Reserva reservasDeEstudiante : reservasDeEstudiantes) {
+            if (reservasDeEstudiante.getJuego().equals(juego) && reservasDeEstudiante.getHorario().equals(horario)) {
                 return true;
             }
         }
@@ -78,10 +72,10 @@ public class GestorReserva {
     }
 
     public ArrayList<Juego> getJuegosDisponibles() {
-        ArrayList<Juego> auxJuegos = new ArrayList();
-        for(int i = 0; i < juegos.size(); i++){
-            if(juegos.get(i).getEstado()){
-                auxJuegos.add(juegos.get(i));
+        ArrayList<Juego> auxJuegos = new ArrayList<>();
+        for (Juego juego : juegos) {
+            if (juego.getEstado()) {
+                auxJuegos.add(juego);
             }
         }
         return auxJuegos;
@@ -155,7 +149,8 @@ public class GestorReserva {
         gestorPago.guardarPagoYTicket();
     }
 
-    public File getReservaFile() {
-        return this.reservasFile;
+    public void guardarReservas() {
+        repositorioReserva.guardarReserva(this);
     }
+
 }

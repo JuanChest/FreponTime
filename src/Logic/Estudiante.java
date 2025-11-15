@@ -69,7 +69,7 @@ public class Estudiante {
                 ", nombre='" + nombre + '\'' +
                 ", usuario='" + usuario + '\'' +
                 ", correoElectrónico='" + correoElectronico + '\'' +
-                ", enLínea=" + enLinea +
+                ", enLinea=" + enLinea +
                 ", numerosDeReservas=" + numerosDeReservas +
                 '}';
     }

@@ -9,6 +9,10 @@ import java.time.format.DateTimeParseException;
 
 public class GestorArchivos {
 
+    private GestorArchivos() {
+        // Constructor del gestor de archivos
+    }
+
     public static void guardarEstudiantes(GestorEstudiante gestorEstudiante, File archivoEstudiante) {
         try {
             FileWriter writer = new FileWriter(archivoEstudiante);
@@ -34,15 +38,15 @@ public class GestorArchivos {
             String nombreEstudiante;
             String usuarioEstudiante;
             String correoEstudiante;
-            String contraseñaEstudiante;
+            String contraseniaEstudiante;
             while ((estudiante = reader.readLine()) != null) {
                 // Procesar la línea
                 apellidoEstudiante = estudiante.split(" ")[0];
                 nombreEstudiante = estudiante.split(" ")[1];
                 usuarioEstudiante = estudiante.split(" ")[2];
                 correoEstudiante = estudiante.split(" ")[3];
-                contraseñaEstudiante = estudiante.split(" ")[4];
-                gestorEstudiante.agregarEstudiante(new Estudiante(apellidoEstudiante, nombreEstudiante, usuarioEstudiante, correoEstudiante, contraseñaEstudiante));
+                contraseniaEstudiante = estudiante.split(" ")[4];
+                gestorEstudiante.agregarEstudiante(new Estudiante(apellidoEstudiante, nombreEstudiante, usuarioEstudiante, correoEstudiante, contraseniaEstudiante));
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

@@ -19,7 +19,7 @@ public class ConfirmarReservaController {
     GestorReserva gestorReserva = GestorReserva.getInstance();
 
     @FXML
-    private void  confirmarReserva(ActionEvent event) {
+    private void confirmarReserva(ActionEvent event) {
         gestorReserva.crearReserva(reservaAux.getJuego(), reservaAux.getHorario());
         NavegacionInterfaces.cambiarVentana((Stage)confirmarReservaButton.getScene().getWindow(), "/presentacion/views/Pagar.fxml", "Seleccionar Juego");
     }
