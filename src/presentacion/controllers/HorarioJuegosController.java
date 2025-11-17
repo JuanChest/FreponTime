@@ -16,7 +16,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class HorarioJuegosController {
-    public static Juego juegoAux;
+    public Juego juegoAux;
     @FXML
     private Button regresarButton;
     @FXML

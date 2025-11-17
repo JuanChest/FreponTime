@@ -1,3 +1,7 @@
 # Carpeta de Intellij
 .idea/
 .scannerwork/
+
+# Carpeta vs code
+.vscode/
+.vs/

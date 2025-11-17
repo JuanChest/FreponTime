@@ -31,8 +31,7 @@ public class GestorArchivos {
     }
 
     public static void cargarEstudiantes(GestorEstudiante gestorEstudiante, File archivoEstudiante) {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(archivoEstudiante));
+        try (BufferedReader reader = new BufferedReader(new FileReader(archivoEstudiante))) {
             String estudiante;
             String apellidoEstudiante;
             String nombreEstudiante;
@@ -95,8 +94,7 @@ public class GestorArchivos {
     }
 
     public static void cargarJuegos(GestorReserva gestorReserva, File archivoJuegos) {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(archivoJuegos));
+        try (BufferedReader reader = new BufferedReader(new FileReader(archivoJuegos))){
             String juego;
             String nombreJuego;
             boolean buenEstado;
