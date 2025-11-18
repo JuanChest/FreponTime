@@ -1,2 +1,0 @@
-Billar true 2.0 /Data/BILLAR.png
-PingPong true 1.0 /Data/PINGPONG.png

@@ -1,4 +1,4 @@
-package Logic;
+package logic;
 
 import java.util.logging.Logger;
 import java.io.File;
@@ -22,13 +22,15 @@ public class GestorPago {
 
     public void crearPagoDeReserva(Reserva nuevaReserva, List<Reserva> reservasDeEstudiantes, Juego juego) {
         Ticket ticket = new Ticket("T-N" + nuevaReserva.getNumero(), LocalDate.now(), LocalTime.now(), false);
-        Pago nuevoPago = new Pago(reservasDeEstudiantes.size(), juego.getPrecioPorHora() * nuevaReserva.getHorario().getTiempo().toHours(), false);
+        Pago nuevoPago = new Pago(reservasDeEstudiantes.size(),
+                juego.getPrecioPorHora() * nuevaReserva.getHorario().getTiempo().toHours(), false);
         nuevoPago.setTicket(ticket);
         tickets.add(ticket);
         pagos.add(nuevoPago);
         nuevaReserva.setPago(nuevoPago); // Asociar el pago a la reserva
         logger.info("Reserva creada con éxito. Ticket generado: " + ticket.getCodigo());
     }
+
     public boolean pagarReserva(Reserva reservaAPagar) {
         if (reservaAPagar.getPago().isEstadoPago()) {
             logger.info("El pago ya fue confirmado.");

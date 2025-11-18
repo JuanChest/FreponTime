@@ -1,6 +1,6 @@
 package presentacion.controllers;
 
-import Logic.GestorReserva;
+import logic.GestorReserva;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -24,16 +24,18 @@ public class LoginController {
     // Método para manejar el evento de inicio de sesión
     @FXML
     private void iniciarSesion(ActionEvent event) {
-        if(!gestorReserva.iniciarSesion(this.correoElectronico.getText(), this.contrasenia.getText())){
-            NavegacionInterfaces.mostrarAlerta("Error al Iniciar","Sus credenciales no son correctas");
+        if (!gestorReserva.iniciarSesion(this.correoElectronico.getText(), this.contrasenia.getText())) {
+            NavegacionInterfaces.mostrarAlerta("Error al Iniciar", "Sus credenciales no son correctas");
             return;
         }
-        NavegacionInterfaces.cambiarVentana((Stage)loginButton.getScene().getWindow(), "/presentacion/views/SeleccionarJuego.fxml", "Juegos");
+        NavegacionInterfaces.cambiarVentana((Stage) loginButton.getScene().getWindow(),
+                "/presentacion/views/SeleccionarJuego.fxml", "Juegos");
     }
 
     @FXML
     private void registrar(ActionEvent event) {
-        NavegacionInterfaces.cambiarVentana((Stage)registerButton.getScene().getWindow(),"/presentacion/views/registro.fxml", "Registro");
+        NavegacionInterfaces.cambiarVentana((Stage) registerButton.getScene().getWindow(),
+                "/presentacion/views/registro.fxml", "Registro");
     }
 
 }

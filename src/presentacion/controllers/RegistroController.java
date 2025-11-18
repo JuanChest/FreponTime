@@ -1,7 +1,7 @@
 package presentacion.controllers;
 
-import Logic.Estudiante;
-import Logic.GestorReserva;
+import logic.Estudiante;
+import logic.GestorReserva;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,11 +25,11 @@ public class RegistroController {
     @FXML
     private Button regresarButton;
 
-    //Clase general:
+    // Clase general:
     GestorReserva gestorReserva = GestorReserva.getInstance();
 
     @FXML
-    public void registrar(ActionEvent event){
+    public void registrar(ActionEvent event) {
         String nombreAux = nombreField.getText();
         String apellidoAux = apellidoField.getText();
         String emailAux = emailTextField.getText();
@@ -37,29 +37,32 @@ public class RegistroController {
         String usuarioAux = usuarioField.getText();
 
         Estudiante estudianteAux = new Estudiante(apellidoAux, nombreAux, usuarioAux, emailAux, contraseniaAux);
-        if(gestorReserva.buscarEstudiante(estudianteAux.getUsuario())){
+        if (gestorReserva.buscarEstudiante(estudianteAux.getUsuario())) {
             NavegacionInterfaces.mostrarAlerta("Operación Fallida", "El usuario ingresado ya se " +
                     "encuentra registrado... Ingrese otro Usuario");
             return;
         }
-        if(gestorReserva.buscarCorreo(estudianteAux.getCorreoElectronico())){
+        if (gestorReserva.buscarCorreo(estudianteAux.getCorreoElectronico())) {
             NavegacionInterfaces.mostrarAlerta("Operación Fallida", "El usuario ingresado ya se " +
                     "encuentra registrado... Ingrese su correo Personal");
             return;
         }
 
-        if(!gestorReserva.enviarCodigo(estudianteAux)){
+        if (!gestorReserva.enviarCodigo(estudianteAux)) {
             NavegacionInterfaces.mostrarAlerta("Operación Fallida", "El Correo Proporcionado no pertenece a " +
                     "la Universidad...");
             return;
         }
         gestorReserva.preservarPosibleEstudiante(estudianteAux);
-        NavegacionInterfaces.cambiarVentana((Stage) registerButton.getScene().getWindow(), "/presentacion/views/VerificaciónDeCodigo.fxml", "Verificacion");
+        NavegacionInterfaces.cambiarVentana((Stage) registerButton.getScene().getWindow(),
+                "/presentacion/views/VerificaciónDeCodigo.fxml", "Verificacion");
 
     }
+
     @FXML
-    public void regresar(ActionEvent event){
-        NavegacionInterfaces.cambiarVentana((Stage)regresarButton.getScene().getWindow(), "/presentacion/views/login.fxml", "Login");
+    public void regresar(ActionEvent event) {
+        NavegacionInterfaces.cambiarVentana((Stage) regresarButton.getScene().getWindow(),
+                "/presentacion/views/login.fxml", "Login");
     }
 
 }

@@ -1,7 +1,7 @@
 package presentacion.controllers;
 
-import Logic.GestorReserva;
-import Logic.Pago;
+import logic.GestorReserva;
+import logic.Pago;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -34,12 +34,12 @@ public class PagarController {
     @FXML
     public void initialize() {
 
-        if(gestorReserva.buscarEstudiante(true).getNumerosDeReservas().isEmpty()){
-           NavegacionInterfaces.mostrarAlerta("ERROR", "El estudiante no tiene reservas.");
-           return;
+        if (gestorReserva.buscarEstudiante(true).getNumerosDeReservas().isEmpty()) {
+            NavegacionInterfaces.mostrarAlerta("ERROR", "El estudiante no tiene reservas.");
+            return;
         }
 
-        if(!gestorReserva.getReservasDeEstudiantes().get(indiceAux).getEstadoDeReserva()){
+        if (!gestorReserva.getReservasDeEstudiantes().get(indiceAux).getEstadoDeReserva()) {
             NavegacionInterfaces.mostrarAlerta("ERROR", "El estudiante no tiene reservas a pagar");
             return;
         }
@@ -58,9 +58,10 @@ public class PagarController {
         NavegacionInterfaces.cambiarVentana((Stage) regresarButton.getScene().getWindow(),
                 "/presentacion/views/SeleccionarJuego.fxml", "Seleccionar Juego...");
     }
+
     @FXML
     private void finalizar(ActionEvent event) {
-        if(!validarTextField.getText().equals(gestorReserva.getVerificacionDePago())){
+        if (!validarTextField.getText().equals(gestorReserva.getVerificacionDePago())) {
             NavegacionInterfaces.mostrarAlerta("ERROR", "El codigo de verificación no es el correcto...");
             return;
         }
@@ -72,6 +73,3 @@ public class PagarController {
                 "/presentacion/views/Ticket.fxml", "Ticket...");
     }
 }
-
-
-

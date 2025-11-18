@@ -1,4 +1,4 @@
-package Logic;
+package logic;
 
 public class Reserva {
     private int numero;
@@ -36,6 +36,7 @@ public class Reserva {
     public boolean getEstadoDeReserva() {
         return this.estadoDeReserva;
     }
+
     public void setPago(Pago pago) {
         this.pago = pago;
     }

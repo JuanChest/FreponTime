@@ -1,6 +1,6 @@
 package presentacion.controllers;
 
-import Logic.*;
+import logic.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -46,10 +46,8 @@ public class TicketController {
     @FXML
     private TableColumn<Horario, Integer> columnaDuracion;
 
-
     @FXML
     private ImageView imageView;
-
 
     ObservableList<Estudiante> estudiante = FXCollections.observableArrayList();
     ObservableList<Horario> horario = FXCollections.observableArrayList();
@@ -58,12 +56,12 @@ public class TicketController {
 
     @FXML
     public void initialize() {
-        if(gestorReserva.buscarEstudiante(true).getNumerosDeReservas().isEmpty()){
+        if (gestorReserva.buscarEstudiante(true).getNumerosDeReservas().isEmpty()) {
             NavegacionInterfaces.mostrarAlerta("ERROR", "El estudiante no tiene tickets disponibles.");
             return;
         }
         int indiceAux = gestorReserva.buscarEstudiante(true).getNumerosDeReservas().getLast();
-        if(gestorReserva.getReservasDeEstudiantes().get(indiceAux).getEstadoDeReserva()){
+        if (gestorReserva.getReservasDeEstudiantes().get(indiceAux).getEstadoDeReserva()) {
             NavegacionInterfaces.mostrarAlerta("ERROR", "El estudiante no ha cancelado su reserva.");
             return;
         }
@@ -82,7 +80,6 @@ public class TicketController {
         this.estudiante.add(gestorReserva.buscarEstudiante(true));
         this.tablaEstudiante.setItems(this.estudiante);
 
-
         this.columnaFecha1.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         this.columnaHora1.setCellValueFactory(new PropertyValueFactory<>("hora"));
         this.columnaDuracion.setCellValueFactory(new PropertyValueFactory<>("tiempo"));
@@ -90,15 +87,16 @@ public class TicketController {
         this.horario.add(gestorReserva.getReservasDeEstudiantes().get(aux).getHorario());
         this.tablaHorario.setItems(this.horario);
 
-        imageView.setImage(new Image(getClass().getResource(gestorReserva.getReservasDeEstudiantes().get(indiceAux).getJuego().getUbicacion()).toExternalForm()));
+        imageView.setImage(new Image(getClass()
+                .getResource(gestorReserva.getReservasDeEstudiantes().get(indiceAux).getJuego().getUbicacion())
+                .toExternalForm()));
     }
+
     @FXML
-    public void continuar (ActionEvent event) {
+    public void continuar(ActionEvent event) {
 
         NavegacionInterfaces.cambiarVentana((Stage) continuarButton.getScene().getWindow(),
                 "/presentacion/views/SeleccionarJuego.fxml", "Seleccionar Juego");
     }
 
 }
-
-

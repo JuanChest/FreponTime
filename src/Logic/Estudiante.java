@@ -1,4 +1,4 @@
-package Logic;
+package logic;
 
 import java.util.ArrayList;
 
@@ -50,7 +50,7 @@ public class Estudiante {
         return this.enLinea;
     }
 
-    public void  setNumerosDeReservas(int numerosDeReservas) {
+    public void setNumerosDeReservas(int numerosDeReservas) {
         this.numerosDeReservas.add(numerosDeReservas);
     }
 

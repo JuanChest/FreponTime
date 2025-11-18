@@ -1,4 +1,4 @@
-package Logic;
+package logic;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -15,6 +15,7 @@ public class Horario {
         this.hora = hora;
         this.tiempo = tiempo;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -49,6 +50,5 @@ public class Horario {
     public void setHora(LocalTime hora) {
         this.hora = hora;
     }
-
 
 }

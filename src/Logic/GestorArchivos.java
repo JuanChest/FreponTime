@@ -1,4 +1,4 @@
-package Logic;
+package logic;
 
 import java.io.*;
 import java.time.Duration;
@@ -45,7 +45,8 @@ public class GestorArchivos {
                 usuarioEstudiante = estudiante.split(" ")[2];
                 correoEstudiante = estudiante.split(" ")[3];
                 contraseniaEstudiante = estudiante.split(" ")[4];
-                gestorEstudiante.agregarEstudiante(new Estudiante(apellidoEstudiante, nombreEstudiante, usuarioEstudiante, correoEstudiante, contraseniaEstudiante));
+                gestorEstudiante.agregarEstudiante(new Estudiante(apellidoEstudiante, nombreEstudiante,
+                        usuarioEstudiante, correoEstudiante, contraseniaEstudiante));
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -65,7 +66,7 @@ public class GestorArchivos {
                 String nombreJuego = datos[1];
                 boolean estadoDeReserva = Boolean.parseBoolean(datos[2]);
                 LocalDate fecha = LocalDate.parse(datos[3]); // Formato: yyyy-MM-dd
-                LocalTime hora = LocalTime.parse(datos[4]);   // Formato: HH:mm
+                LocalTime hora = LocalTime.parse(datos[4]); // Formato: HH:mm
                 Duration tiempo = Duration.ofMinutes(Long.parseLong(datos[5])); // Minutos
 
                 // Crear el objeto Horario
@@ -94,7 +95,7 @@ public class GestorArchivos {
     }
 
     public static void cargarJuegos(GestorReserva gestorReserva, File archivoJuegos) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(archivoJuegos))){
+        try (BufferedReader reader = new BufferedReader(new FileReader(archivoJuegos))) {
             String juego;
             String nombreJuego;
             boolean buenEstado;
@@ -106,7 +107,7 @@ public class GestorArchivos {
                 buenEstado = Boolean.parseBoolean(juego.split(" ")[1]);
                 precioPorHora = Double.parseDouble(juego.split(" ")[2]);
                 ubImage = juego.split(" ")[3];
-                //TODO: Hacer función agregarJuegos en gestor reserva
+                // TODO: Hacer función agregarJuegos en gestor reserva
                 gestorReserva.agregarJuegos(new Juego(nombreJuego, buenEstado, precioPorHora, ubImage));
             }
         } catch (FileNotFoundException e) {
@@ -115,7 +116,8 @@ public class GestorArchivos {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
     }
-    public static void guardarReservas(GestorReserva gestorReserva,File archivoReservas) {
+
+    public static void guardarReservas(GestorReserva gestorReserva, File archivoReservas) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivoReservas))) {
             // Formatos de fecha y hora
             DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -164,7 +166,7 @@ public class GestorArchivos {
             while ((estudiante = reader.readLine()) != null) {
                 // Procesar la línea
                 usuarioEstudiante = estudiante.split(" ")[0];
-                numeroDeReserva =Integer.parseInt(estudiante.split(" ")[1]);
+                numeroDeReserva = Integer.parseInt(estudiante.split(" ")[1]);
                 gestorReserva.agregarReservasAlEstudiante(usuarioEstudiante, numeroDeReserva);
             }
         } catch (FileNotFoundException e) {
@@ -173,12 +175,13 @@ public class GestorArchivos {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
     }
+
     public static void guardarReservasDeEstudiantes(GestorReserva gestorReserva, File archivoReservasDeEstudiantes) {
-        //Formato = usuario nReserva
+        // Formato = usuario nReserva
         try {
             FileWriter writer = new FileWriter(archivoReservasDeEstudiantes);
             for (Estudiante estudiante : gestorReserva.getGestorEstudiante().getEstudiantes()) {
-                for(Integer nReserva : estudiante.getNumerosDeReservas()){
+                for (Integer nReserva : estudiante.getNumerosDeReservas()) {
                     writer.write(estudiante.getUsuario() + " "
                             + nReserva + "\n");
                 }
@@ -189,14 +192,13 @@ public class GestorArchivos {
         }
     }
 
-    public static void cargarPagos(GestorPago gestorPago, File pagos){
+    public static void cargarPagos(GestorPago gestorPago, File pagos) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(pagos));
             String pago;
             int nPago;
             double monto;
             boolean estadoPago;
-
 
             while ((pago = reader.readLine()) != null) {
                 // Procesar la línea
@@ -211,7 +213,8 @@ public class GestorArchivos {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
     }
-    public static void guardarPagos(GestorPago gestorPago, File pagos){
+
+    public static void guardarPagos(GestorPago gestorPago, File pagos) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(pagos))) {
             for (Pago pago : gestorPago.getPagos()) {
                 // Formato: nPago monto estadoPago
@@ -223,6 +226,7 @@ public class GestorArchivos {
             System.out.println("Error al escribir en el archivo de pagos: " + e.getMessage());
         }
     }
+
     public static void cargarTicket(GestorPago gestorPago, File tickets) {
         try (BufferedReader reader = new BufferedReader(new FileReader(tickets))) {
             String ticket;
@@ -255,13 +259,15 @@ public class GestorArchivos {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
     }
-    public static void guardarTickets(GestorPago gestorPago, File tickets){
+
+    public static void guardarTickets(GestorPago gestorPago, File tickets) {
         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(tickets))) {
             for (Ticket ticket : gestorPago.getTickets()) {
                 String linea = ticket.getCodigo() + " " + ticket.isValidez() + " " +
-                        ticket.getFechaReserva().format(formatoFecha) + " " + ticket.getHoraReserva().format(formatoHora);
+                        ticket.getFechaReserva().format(formatoFecha) + " "
+                        + ticket.getHoraReserva().format(formatoHora);
                 writer.write(linea);
                 writer.newLine();
             }
@@ -269,6 +275,7 @@ public class GestorArchivos {
             System.out.println("Error al escribir en el archivo de tickets: " + e.getMessage());
         }
     }
+
     public static void cargarPagosTicket(GestorPago gestorPago, File pagosTickets) {
         try (BufferedReader reader = new BufferedReader(new FileReader(pagosTickets))) {
             String linea;
@@ -310,7 +317,8 @@ public class GestorArchivos {
             System.out.println("Error al leer el archivo de pagos-tickets: " + e.getMessage());
         }
     }
-    public static void guardarPagosTicket(GestorPago gestorPago, File pagosTickets){
+
+    public static void guardarPagosTicket(GestorPago gestorPago, File pagosTickets) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(pagosTickets))) {
             for (Pago pago : gestorPago.getPagos()) {
                 String linea = pago.getTicket().getCodigo() + " " + pago.getNPago();
@@ -322,4 +330,3 @@ public class GestorArchivos {
         }
     }
 }
-

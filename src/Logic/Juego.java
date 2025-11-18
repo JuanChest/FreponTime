@@ -1,5 +1,4 @@
-package Logic;
-
+package logic;
 
 public class Juego {
     private String nombre;
@@ -13,7 +12,6 @@ public class Juego {
         this.precioPorHora = precioPorHora;
         this.image = ubImage;
     }
-
 
     public boolean getEstado() {
         return buenEstado;
@@ -35,10 +33,10 @@ public class Juego {
 
     @Override
     public boolean equals(Object obj) {
-        if(this == obj){
+        if (this == obj) {
             return true;
         }
-        if(obj == null || getClass() != obj.getClass()){
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
         Juego juego = (Juego) obj;

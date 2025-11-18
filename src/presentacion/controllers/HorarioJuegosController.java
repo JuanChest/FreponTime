@@ -1,9 +1,9 @@
 package presentacion.controllers;
 
-import Logic.Horario;
-import Logic.Juego;
-import Logic.GestorReserva;
-import Logic.Reserva;
+import logic.Horario;
+import logic.Juego;
+import logic.GestorReserva;
+import logic.Reserva;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -16,7 +16,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class HorarioJuegosController {
-    public Juego juegoAux;
+    public static Juego juegoAux;
     @FXML
     private Button regresarButton;
     @FXML
@@ -51,28 +51,31 @@ public class HorarioJuegosController {
 
     @FXML
     private void regresarSeleccionarJuego(ActionEvent event) {
-        NavegacionInterfaces.cambiarVentana((Stage)regresarButton.getScene().getWindow(),"/presentacion/views/SeleccionarJuego.fxml", "Reservar Juego");
+        NavegacionInterfaces.cambiarVentana((Stage) regresarButton.getScene().getWindow(),
+                "/presentacion/views/SeleccionarJuego.fxml", "Reservar Juego");
     }
 
     @FXML
     private void reservarJuego(ActionEvent event) {
-        if(gestorReserva.existirReservasDuplicadas(juegoAux, horario)){
+        if (gestorReserva.existirReservasDuplicadas(juegoAux, horario)) {
             NavegacionInterfaces.mostrarAlerta("ERROR", "Existe una reserva en ese horario");
             return;
         }
-        if(!gestorReserva.buscarEstudiante(true).getNumerosDeReservas().isEmpty()){
+        if (!gestorReserva.buscarEstudiante(true).getNumerosDeReservas().isEmpty()) {
             int indice = gestorReserva.buscarEstudiante(true).getNumerosDeReservas().getLast();
-            if(gestorReserva.getReservasDeEstudiantes().get(indice).getEstadoDeReserva()){
+            if (gestorReserva.getReservasDeEstudiantes().get(indice).getEstadoDeReserva()) {
                 NavegacionInterfaces.mostrarAlerta("ERROR", "Existe una reserva del estudiante");
                 return;
             }
         }
-        if(horario.getHora() == null){
+        if (horario.getHora() == null) {
             NavegacionInterfaces.mostrarAlerta("ERROR", "No hay horario seleccionado.");
             return;
         }
-        ConfirmarReservaController.reservaAux = new Reserva(gestorReserva.getReservasDeEstudiantes().size(),juegoAux, horario);
-        NavegacionInterfaces.cambiarVentana((Stage)reservarButton.getScene().getWindow(),"/presentacion/views/ConfirmarReserva.fxml", "Confirmar Reserva");
+        ConfirmarReservaController.setReservaAux(new Reserva(gestorReserva.getReservasDeEstudiantes().size(), juegoAux,
+                horario));
+        NavegacionInterfaces.cambiarVentana((Stage) reservarButton.getScene().getWindow(),
+                "/presentacion/views/ConfirmarReserva.fxml", "Confirmar Reserva");
     }
 
     @FXML
@@ -84,6 +87,7 @@ public class HorarioJuegosController {
     private void seleccionar1011(ActionEvent event) {
         seleccionarHora(1, 10, 0);
     }
+
     @FXML
     private void seleccionar1112(ActionEvent event) {
         seleccionarHora(2, 11, 0);
@@ -118,21 +122,23 @@ public class HorarioJuegosController {
     private void seleccionar1718(ActionEvent event) {
         seleccionarHora(8, 17, 0);
     }
+
     private void cambiarDeshabilitadoAlCheckBoxes(CheckBox checkBox, boolean estado) {
-        for(CheckBox aux : checkBoxes) {
-            if(aux != checkBox) {
+        for (CheckBox aux : checkBoxes) {
+            if (aux != checkBox) {
                 aux.setDisable(estado);
             }
         }
     }
+
     private void seleccionarHora(int numeroArreglo, int hora, int minuto) {
-        if(checkBoxes.get(numeroArreglo).isSelected()) {
-            horario.setHora(LocalTime.of(hora,minuto));
+        if (checkBoxes.get(numeroArreglo).isSelected()) {
+            horario.setHora(LocalTime.of(hora, minuto));
 
             cambiarDeshabilitadoAlCheckBoxes(checkBoxes.get(numeroArreglo), true);
             return;
         }
-        if(!(checkBoxes.get(numeroArreglo).isSelected() && checkBoxes.get(numeroArreglo).isIndeterminate())) {
+        if (!(checkBoxes.get(numeroArreglo).isSelected() && checkBoxes.get(numeroArreglo).isIndeterminate())) {
             horario.setHora(null);
             cambiarDeshabilitadoAlCheckBoxes(checkBoxes.get(numeroArreglo), false);
         }

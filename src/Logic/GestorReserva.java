@@ -1,4 +1,4 @@
-package Logic;
+package logic;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class GestorReserva {
     }
 
     private void cargarPagosYTicket() {
-        for(int i =0; i < gestorPago.getPagos().size(); i++){
+        for (int i = 0; i < gestorPago.getPagos().size(); i++) {
             gestorPago.getPagos().get(i).setTicket(gestorPago.getTickets().get(i));
             reservasDeEstudiantes.get(i).setPago(gestorPago.getPagos().get(i));
         }
@@ -37,19 +37,18 @@ public class GestorReserva {
             instance = new GestorReserva(new RepositorioReserva(
                     "src/Datos/Reserva.txt",
                     "src/Datos/Juegos.txt",
-                    "src/Datos/ReservasDeEstudiante.txt"
-            ));
+                    "src/Datos/ReservasDeEstudiante.txt"));
         }
         return instance;
     }
 
     public void crearReserva(Juego juego, Horario horario) {
-        if(existirReservasDuplicadas(juego, horario)){
+        if (existirReservasDuplicadas(juego, horario)) {
             System.out.println("Ya existe una reserva para este juego y horario.");
             return;
         }
-        for(Estudiante estudianteEnLínea: gestorEstudiante.getEstudiantes()){
-            if(estudianteEnLínea.isEnLinea()){
+        for (Estudiante estudianteEnLínea : gestorEstudiante.getEstudiantes()) {
+            if (estudianteEnLínea.isEnLinea()) {
                 Reserva nuevaReserva = new Reserva(reservasDeEstudiantes.size(), juego, horario);
                 estudianteEnLínea.getNumerosDeReservas().add(nuevaReserva.getNumero());
                 reservasDeEstudiantes.add(nuevaReserva);
@@ -63,7 +62,7 @@ public class GestorReserva {
     }
 
     public boolean existirReservasDuplicadas(Juego juego, Horario horario) {
-            for (Reserva reservasDeEstudiante : reservasDeEstudiantes) {
+        for (Reserva reservasDeEstudiante : reservasDeEstudiantes) {
             if (reservasDeEstudiante.getJuego().equals(juego) && reservasDeEstudiante.getHorario().equals(horario)) {
                 return true;
             }
@@ -92,7 +91,8 @@ public class GestorReserva {
     public boolean buscarEstudiante(String usuario) {
         return gestorEstudiante.buscarEstudiante(usuario);
     }
-    public Estudiante buscarEstudiante(boolean estadoEstudiante){
+
+    public Estudiante buscarEstudiante(boolean estadoEstudiante) {
         return gestorEstudiante.buscarEstudiante(estadoEstudiante);
     }
 

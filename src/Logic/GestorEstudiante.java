@@ -1,4 +1,4 @@
-package Logic;
+package logic;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,9 +26,11 @@ public class GestorEstudiante {
         System.out.println("Se registrado un estudiante con éxito");
         System.out.println(estudiante);
     }
-    public boolean iniciarSesion (String correo, String contrasena){
-        for(Estudiante estudiante: estudiantes){
-            if(estudiante.getCorreoElectronico().compareTo(correo) == 0 && estudiante.getContrasenia().compareTo(contrasena) ==0){
+
+    public boolean iniciarSesion(String correo, String contrasena) {
+        for (Estudiante estudiante : estudiantes) {
+            if (estudiante.getCorreoElectronico().compareTo(correo) == 0
+                    && estudiante.getContrasenia().compareTo(contrasena) == 0) {
                 estudiante.setEnLinea(true);
                 System.out.println("Se ha iniciado sesion");
                 return true;
@@ -39,33 +41,33 @@ public class GestorEstudiante {
 
     public boolean buscarEstudiante(String usuario) {
         for (Estudiante estudiante : estudiantes) {
-            if(estudiante.getUsuario().equals(usuario)) {
+            if (estudiante.getUsuario().equals(usuario)) {
                 return true;
             }
         }
         return false;
     }
+
     public void imprimirEstudiantes() {
         for (Estudiante estudiante : estudiantes) {
             System.out.println(estudiante);
         }
     }
-    private String generarCódigoRandom(int limiteInferior, int limiteSuperior) {
+
+    private String generarCodigoRandom(int limiteInferior, int limiteSuperior) {
         Random random = new Random();
         return Integer.toString(random.nextInt(limiteSuperior - limiteInferior + 1) + limiteInferior);
     }
+
     public ArrayList<Estudiante> getEstudiantes() {
         return estudiantes;
     }
 
     public boolean enviarCodigo(Estudiante estudiante) {
         GestorCorreosElectronicos correosElectronicos = new GestorCorreosElectronicos();
-        this.codigoDeVerificacion = generarCódigoRandom(1000,9999);
-        if(!correosElectronicos.enviarMensajeDeVerificaciónDeRegistro(estudiante.getCorreoElectronico(),
-                this.codigoDeVerificacion, estudiante.getUsuario())){
-            return false;
-        }
-        return true;
+        this.codigoDeVerificacion = generarCodigoRandom(1000, 9999);
+        return correosElectronicos.enviarMensajeDeVerificacionDeRegistro(estudiante.getCorreoElectronico(),
+                this.codigoDeVerificacion, estudiante.getUsuario());
     }
 
     public boolean verificarCodigo(String codigo) {
@@ -81,9 +83,9 @@ public class GestorEstudiante {
         GestorArchivos.guardarEstudiantes(this, estudianteFile);
     }
 
-    public boolean buscarCorreo(String correoElectrónico) {
+    public boolean buscarCorreo(String correoElectronico) {
         for (Estudiante estudiante : estudiantes) {
-            if(estudiante.getCorreoElectronico().equals(correoElectrónico)){
+            if (estudiante.getCorreoElectronico().equals(correoElectronico)) {
                 return true;
             }
         }
@@ -91,18 +93,17 @@ public class GestorEstudiante {
     }
 
     public Estudiante buscarEstudiante(boolean estadoEstudiante) {
-        for(Estudiante estudianteAux: estudiantes){
-            if(estudianteAux.getEnLinea() == estadoEstudiante){
+        for (Estudiante estudianteAux : estudiantes) {
+            if (estudianteAux.getEnLinea() == estadoEstudiante) {
                 return estudianteAux;
             }
         }
         return null;
     }
 
-
     public void agregarReservas(String usuarioEstudiante, int numeroDeReserva) {
-        for(int i = 0; i < estudiantes.size(); i++){
-            if(estudiantes.get(i).getUsuario().equals(usuarioEstudiante)){
+        for (int i = 0; i < estudiantes.size(); i++) {
+            if (estudiantes.get(i).getUsuario().equals(usuarioEstudiante)) {
                 estudiantes.get(i).setNumerosDeReservas(numeroDeReserva);
                 return;
             }

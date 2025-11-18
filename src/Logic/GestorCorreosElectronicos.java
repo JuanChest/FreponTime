@@ -1,4 +1,4 @@
-package Logic;
+package logic;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -17,7 +17,7 @@ public class GestorCorreosElectronicos {
 
     private void crearCorreo(String emailTo, String códigoVerificación, String usuario) {
         asunto = "Código de verificación para FreponTime";
-        cuerpo =  "[" + códigoVerificación + "]"
+        cuerpo = "[" + códigoVerificación + "]"
                 + "\nSaludos cordiales - Verificación de cuenta para: \"" + usuario
                 + "\". \n\n\n\nAtentamente: \n\nFreponTime.";
 
@@ -46,8 +46,9 @@ public class GestorCorreosElectronicos {
             throw new RuntimeException(e);
         }
     }
+
     private void enviarCorreo() {
-        //Envía el mensaje
+        // Envía el mensaje
         try {
             Transport transport = sesión.getTransport("smtp");
             transport.connect(emailFrom, password);
@@ -58,13 +59,14 @@ public class GestorCorreosElectronicos {
             throw new RuntimeException(e);
         }
     }
-    public boolean enviarMensajeDeVerificaciónDeRegistro(String correo, String códigoVerificación, String usuario){
+
+    public boolean enviarMensajeDeVerificacionDeRegistro(String correo, String codigoVerificacion, String usuario) {
         // Verificar si el correo cumple con el dominio "@epn.edu.ec"
         if (!correo.endsWith("@epn.edu.ec")) {
             System.out.println("Error: El correo debe pertenecer a un estudiante de la EPN");
             return false;
         }
-        crearCorreo(correo, códigoVerificación,usuario);
+        crearCorreo(correo, codigoVerificacion, usuario);
         enviarCorreo();
         return true;
     }

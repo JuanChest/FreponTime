@@ -1,6 +1,6 @@
 package presentacion.controllers;
 
-import Logic.GestorReserva;
+import logic.GestorReserva;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,7 +19,7 @@ public class VerificacionController {
 
     @FXML
     public void confirmar(ActionEvent event) {
-        if(!reserva.verificarCodigo(this.codigoField.getText())){
+        if (!reserva.verificarCodigo(this.codigoField.getText())) {
             NavegacionInterfaces.mostrarAlerta("ERROR...", "El código enviado no es correcto.");
             return;
         }
@@ -29,6 +29,7 @@ public class VerificacionController {
         NavegacionInterfaces.cambiarVentana((Stage) confirmacionButton.getScene().getWindow(),
                 "/presentacion/views/login.fxml", "Login");
     }
+
     @FXML
     public void regresar(ActionEvent event) {
         NavegacionInterfaces.cambiarVentana((Stage) regresarButton.getScene().getWindow(),
